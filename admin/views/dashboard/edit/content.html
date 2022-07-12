@@ -1,0 +1,43 @@
+{{define "content"}}
+<h1>
+    Edit-Content
+    <a href="/admin" class="btn btn-outline-primary float-right"><i class="fa fa-arrow-left"></i> Back</a>
+</h1>
+<hr>
+<form action="/admin/update/{{ .Post.ID }}" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>Content Title </label>
+        <input type="text" name="blog-title" class="form-control" value="{{ .Post.Title }}">
+    </div>
+    <div class="form-group">
+        <label>Content Description </label>
+        <textarea name="blog-desc" cols="30" row="2" class="form-control">{{.Post.Description}}</textarea>
+    </div>
+    <div class="form-group">
+        <label> Category </label>
+        <select name="blog-category" class="form-control">
+            <option value="1">
+                Technology
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <img width="100px" src="/{{ .Post.Picture_url }}" class="my-2" id="current-picture">
+        <label>Content picture </label>
+        <input type="file" name="blog-picture" class="form-control-file" id="file-upload">
+        <input type="hidden" name="is_selected" id="is_selected" value="0">
+    </div>
+    <div class="form-group">
+        <label>Content Content </label>
+        <textarea name="blog-content" id="summernote" cols="30" row="2" class="form-control">{{.Post.Content}}</textarea>
+    </div>
+    <button class="btn btn-outline-danger my-3" type="submit">Update</button>
+</form>
+
+<script>
+    document.getElementById("file-upload").addEventListener("change", function (){
+        document.getElementById("is_selected").setAttribute("value", "1")
+        document.getElementById("current-picture").style.display="none"
+    })
+</script>
+{{end}}
